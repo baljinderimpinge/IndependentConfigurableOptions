@@ -1,0 +1,666 @@
+<style>
+/*! Hint.css - v1.2.2 - 2013-06-01
+* http://kushagragour.in/lab/hint/
+* Copyright (c) 2013 Kushagra Gour; Licensed MIT */
+
+/*-------------------------------------*\
+	HINT.css - A CSS tooltip library
+\*-------------------------------------*/
+/**
+ * HINT.css is a tooltip library made in pure CSS.
+ *
+ * Source: https://github.com/chinchang/hint.css
+ * Demo: http://kushagragour.in/labs/hint/
+ *
+ * Release under The MIT License
+ *
+ */
+/**
+ * source: hint-core.scss
+ *
+ * Defines the basic styling for the tooltip.
+ * Each tooltip is made of 2 parts:
+ * 	1) body (:after)
+ * 	2) arrow (:before)
+ * 
+ * Classes added:
+ * 	1) hint
+ */
+.hint, [data-hint] {
+  position: relative;
+  display: inline-block;
+  /**
+	 * tooltip arrow
+	 */
+  /**
+	 * tooltip body
+	 */ }
+  .hint:before, .hint:after, [data-hint]:before, [data-hint]:after {
+  /*   position: absolute; */
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1000000;
+    pointer-events: none;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    transition: 0.3s ease; }
+  .hint:hover:before, .hint:hover:after, [data-hint]:hover:before, [data-hint]:hover:after {
+    visibility: visible;
+    opacity: 1; }
+  .hint:before, [data-hint]:before {
+    content: '';
+    position: absolute;
+    background: transparent;
+    border: 6px solid transparent;
+    z-index: 1000001; }
+  .hint:after, [data-hint]:after {
+    content: attr(data-hint);
+    background: #383838;
+    color: white;
+    text-shadow: 0 -1px 0px black;
+    padding: 8px 10px;
+    font-size: 12px;
+    line-height: 12px;
+    white-space: nowrap;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); }
+
+/**
+ * source: hint-position.scss
+ *
+ * Defines the positoning logic for the tooltips.
+ * 
+ * Classes added:
+ * 	1) hint--top
+ * 	2) hint--bottom
+ * 	3) hint--left
+ * 	4) hint--right
+ */
+/**
+ * set default color for tooltip arrows
+ */
+.hint--top:before {
+  border-top-color: #383838; }
+
+.hint--bottom:before {
+  border-bottom-color: #383838; 
+
+  }
+
+.hint--left:before {
+  border-left-color: #383838; }
+
+.hint--right:before {
+  border-right-color: #383838; }
+
+/**
+ * top tooltip
+ */
+.hint--top:before {
+  margin-bottom: -12px; }
+.hint--top:after {
+  margin-left: -18px; }
+.hint--top:before, .hint--top:after {
+  bottom: 100%;
+  left: 50%; }
+.hint--top:hover:before, .hint--top:hover:after {
+  -webkit-transform: translateY(-8px);
+  -moz-transform: translateY(-8px);
+  transform: translateY(-8px); }
+
+/**
+ * bottom tooltip
+ */
+.hint--bottom:before {
+  margin-top: -12px;   /* width:300px; */}
+.hint--bottom:after {
+  margin-left: -18px;   width:300px;}
+.hint--bottom:before, .hint--bottom:after {
+  top: 100%;
+  left: 50%; }
+.hint--bottom:hover:before, .hint--bottom:hover:after {
+  -webkit-transform: translateY(8px);
+  -moz-transform: translateY(8px);
+  transform: translateY(8px); }
+
+/**
+ * right tooltip
+ */
+.hint--right:before {
+  margin-left: -12px;
+  margin-bottom: -6px; }
+.hint--right:after {
+  margin-bottom: -14px; }
+.hint--right:before, .hint--right:after {
+  left: 100%;
+  bottom: 50%; }
+.hint--right:hover:before, .hint--right:hover:after {
+  -webkit-transform: translateX(8px);
+  -moz-transform: translateX(8px);
+  transform: translateX(8px); }
+
+/**
+ * left tooltip
+ */
+.hint--left:before {
+  margin-right: -12px;
+  margin-bottom: -6px; }
+.hint--left:after {
+  margin-bottom: -14px; }
+.hint--left:before, .hint--left:after {
+  right: 100%;
+  bottom: 50%; }
+.hint--left:hover:before, .hint--left:hover:after {
+  -webkit-transform: translateX(-8px);
+  -moz-transform: translateX(-8px);
+  transform: translateX(-8px); }
+
+/**
+ * source: hint-color-types.scss
+ *
+ * Contains tooltips of various types based on color differences.
+ * 
+ * Classes added:
+ * 	1) hint--error
+ * 	2) hint--warning
+ * 	3) hint--info
+ * 	4) hint--success
+ * 	
+ */
+/**
+ * Error
+ */
+.hint--error:after {
+  background-color: #b34e4d;
+  text-shadow: 0 -1px 0px #5a2626; }
+.hint--error.hint--top:before {
+  border-top-color: #b34e4d; }
+.hint--error.hint--bottom:before {
+  border-bottom-color: #b34e4d; }
+.hint--error.hint--left:before {
+  border-left-color: #b34e4d; }
+.hint--error.hint--right:before {
+  border-right-color: #b34e4d; }
+
+/**
+ * Warning
+ */
+.hint--warning:after {
+  background-color: #c09854;
+  text-shadow: 0 -1px 0px #6d5228; }
+.hint--warning.hint--top:before {
+  border-top-color: #c09854; }
+.hint--warning.hint--bottom:before {
+  border-bottom-color: #c09854; }
+.hint--warning.hint--left:before {
+  border-left-color: #c09854; }
+.hint--warning.hint--right:before {
+  border-right-color: #c09854; }
+
+/**
+ * Info
+ */
+.hint--info:after {
+  background-color: #3986ac;
+  text-shadow: 0 -1px 0px #193c4c; }
+.hint--info.hint--top:before {
+  border-top-color: #3986ac; }
+.hint--info.hint--bottom:before {
+  border-bottom-color: #3986ac; }
+.hint--info.hint--left:before {
+  border-left-color: #3986ac; }
+.hint--info.hint--right:before {
+  border-right-color: #3986ac; }
+
+/**
+ * Success
+ */
+.hint--success:after {
+  background-color: #458746;
+  text-shadow: 0 -1px 0px #1a331a; }
+.hint--success.hint--top:before {
+  border-top-color: #458746; }
+.hint--success.hint--bottom:before {
+  border-bottom-color: #458746; }
+.hint--success.hint--left:before {
+  border-left-color: #458746; }
+.hint--success.hint--right:before {
+  border-right-color: #458746; }
+
+/**
+ * source: hint-always.scss
+ *
+ * Defines a persisted tooltip which shows always.
+ * 
+ * Classes added:
+ * 	1) hint--always
+ * 	
+ */
+.hint--always:after, .hint--always:before {
+  opacity: 1;
+  visibility: visible; }
+.hint--always.hint--top:after, .hint--always.hint--top:before {
+  -webkit-transform: translateY(-8px);
+  -moz-transform: translateY(-8px);
+  transform: translateY(-8px); }
+.hint--always.hint--bottom:after, .hint--always.hint--bottom:before {
+  -webkit-transform: translateY(8px);
+  -moz-transform: translateY(8px);
+  transform: translateY(8px); }
+.hint--always.hint--left:after, .hint--always.hint--left:before {
+  -webkit-transform: translateX(-8px);
+  -moz-transform: translateX(-8px);
+  transform: translateX(-8px); }
+.hint--always.hint--right:after, .hint--always.hint--right:before {
+  -webkit-transform: translateX(8px);
+  -moz-transform: translateX(8px);
+  transform: translateX(8px); }
+
+/**
+ * source: hint-rounded.scss
+ *
+ * Defines rounded corner tooltips.
+ * 
+ * Classes added:
+ * 	1) hint--rounded
+ *  
+ */
+.hint--rounded:after {
+  border-radius: 4px; }
+</style>
+
+<?php
+$_product    = $this->getProduct();
+$_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
+/* $configurable= Mage::getModel('catalog/product_type_configurable')->setProduct($_product );
+$simpleCollection = $configurable->getUsedProductCollection()->addAttributeToSelect('*')->addFilterByRequiredOptions(); */
+/* foreach($simpleCollection as $simpleProduct){
+
+    echo "name:".$simpleProduct->getName();
+    echo "<br>";
+    echo "price:".$simpleProduct->getPrice();
+    echo "<br>";
+}
+die(); */
+?>
+<!-- <style>
+ .attrActive{
+		border:2px solid red !important;
+	} 
+</style> -->
+
+<?php if ($_product->isSaleable() && count($_attributes)):?>
+    <dl>
+    <?php //foreach($_attributes as $_attribute):
+	
+	?>
+        
+
+            <div class="input-box customAttr">
+				<?php $configs = $this->getRegularConfig();?>
+				
+				<?php foreach($configs['attributes'] as $attributeId=>$config):
+				
+					/* echo '<pre>';
+					print_r($config['options']); */
+						//echo '<pre>'; print_r($configs['attributes']); echo '</pre>';
+						
+				?>
+					<div class="config_custom_div">
+					<span class="conAttr"><div class="config_custom_label"><dt><label class="required"><?php echo $config['label']; ?><em>*</em></label></dt></div>
+					<div class="config_custom_valuee">
+					<?php
+					//$comboarr = array();
+					
+					foreach($config['options'] as $key => $value):
+							//$implodearr = implode(',',$value['products']);
+							//$comboarr[$value['id']] = $implodearr;
+							$comboarr[$value['id']] = $value['products'];
+							
+						?>	
+						<div  id="custom_hover_config<?php echo $value['id']?>" class="custom_hover_config">
+                        <dd id="custom_multiselect<?php echo $value['id']?>" rel="<?php echo $attributeId; ?>">
+                         <label class="label-radio-configurable" id="<?php echo (float)$value['price'];?>" rel="<?php echo (float) $_product->getPrice(); ?>">
+						<input type="radio" name="super_attribute[<?php echo $attributeId; ?>]"
+								id="attribute<?php echo $value['id']?>" supervalue="<?php echo $attributeId;?>" price="<?php echo $value['price'];?>"
+								class="validate-custom-configurable"
+								value="<?php echo $value['id']?>"/>
+							<?php echo $value['label']?>
+						</label> 
+						</dd>
+							<div id="notconfig<?php echo $value['id']?>" class="hover_configtxt">Not Available in Configuration</div>
+					</div>
+						
+					<?php endforeach;?>
+					</div>
+					</span>
+					</div>
+				<?php endforeach;?>
+                 
+              </div>
+			  
+<?php 
+
+/* echo '<pre>';
+print_r($childImageArr); */	
+?>
+<?php 
+	/*  echo '<pre>';
+	print_r($comboarr);  
+	 echo '</pre>'; */
+	//endforeach;
+	$catImgArr=array(); 
+	foreach($comboarr as $key=>$productidArr)
+	{
+		/* echo '<pre>';
+		print_r($productidArr); */ 
+		$flags=0;
+		$procount=count($productidArr);
+		foreach($productidArr as $productId)
+		{
+			$flags++;
+			if($flags==$procount)
+			{
+				
+				$productData = Mage::getModel('catalog/product')->load($productId); 		
+				 $myimg=Mage::helper('catalog/image')->init($productData, 'image')->resize(335,335);
+				//$catImgArr[$productId]='"'.$mytest.'"';
+				$catImgArr[$productId]=addslashes($myimg);
+				//$catImgArr[$productId]=Mage::helper('catalog/image')->init($productData, 'image')->resize(335,335);
+			}
+		} 
+	}
+/* 	echo '<pre>';
+	echo '<br>';
+	print_r($catImgArr);
+ */
+ 		//echo '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(335,335).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'"/>';			
+
+	?>
+	<!-- <a href="<?php// echo $this->helper('catalog/image')->init($_product, 'image')->resize(600,600); ?>"  rel="<?php //echo implode($config, ',');?>" title="<?php// echo $this->escapeHtml($this->getImageLabel()) ?>" id="zoom1" class="cloud-zoom">-->
+<script type="text/javascript">
+	function addtocartvalid()	
+	{
+
+			var radioselection= new Array();
+			var superattrvalues= new Array();
+			var attrSelectProdsNew = new Array();
+			
+			var _customAttrRel_new = '<?php echo json_encode($comboarr); ?>';
+			var _catImgArr_new = '<?php echo json_encode($catImgArr); ?>';
+				
+			searchArrayNew = jQuery.parseJSON(_customAttrRel_new);			
+			searchImgArrayNew = jQuery.parseJSON(_catImgArr_new);	
+			
+			searchArrayNew = jQuery.parseJSON(_customAttrRel_new);			
+			searchImgArrayNew = jQuery.parseJSON(_catImgArr_new);
+			console.log(searchImgArrayNew);
+			//to disable add to cart button
+			jQuery("div.customAttr").find("div.config_custom_div").each(function(){
+			var supeattrid=jQuery(this).find("dd").attr("rel");
+			superattrvalues.push(supeattrid);
+			//jQuery('input[name="super_attribute[136]"]').is(":checked");
+			var radioselc=jQuery('input[name="super_attribute['+supeattrid+']"]').is(":checked");
+			//console.log(radioselc);
+			radioselection.push(radioselc);
+		});
+			//jQuery.unique(radioselection);
+			//console.log(radioselection);
+			if(jQuery.inArray(false,radioselection) >= 0)
+			{
+					jQuery(".btn-cart").addClass("hint--bottom");
+					jQuery(".btn-cart").attr('data-hint', 'You need to select the given options for this Products!!');
+					jQuery(".btn-cart").attr('disabled', 'disabled');
+			}
+			else
+			{
+			
+				for(var i = 0; i < superattrvalues.length; i++){
+					var attrIdvalue=jQuery('input[name="super_attribute['+superattrvalues[i]+']"]:radio:checked').val();
+						/* if(jQuery.inArray( radioselection[i], prodIDs ) >= 0){ */
+							 console.log(attrIdvalue);
+						/* }	 */					
+					
+					
+						jQuery.each(searchArrayNew, function(key, prodIDs) {
+							if(key > 0 && prodIDs.length > 0){
+								if(key == attrIdvalue){	
+									attrSelectProdsNew.push(prodIDs);	
+								}				
+							}				
+						});
+					}
+					console.log(attrSelectProdsNew);
+					console.log("======");
+					var result = attrSelectProdsNew.shift().reduce(function(res, v) {
+						if (res.indexOf(v) === -1 && attrSelectProdsNew.every(function(a) {
+								return a.indexOf(v) !== -1;
+							})) res.push(v);
+							
+							// to fetch the child image of the config product code starts here
+							
+							jQuery.each(searchImgArrayNew, function(key, ImgVal){
+							 	for(var t=0;t<res.length;t++)
+								{
+									var findvalues=res[t];
+										if(key==findvalues)
+											{
+												jQuery(".product-image").find('a').attr('href',ImgVal);
+												jQuery(".product-image").find('img').attr('src',ImgVal);
+											//	background-image: url(http://sandbox.diamondgardens.com/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/placeholder.jpg)
+												//jQuery("#cloud-zoom-big").attr('background-image',"url("+ImgVal+")");
+											}
+									
+									
+								} 
+							
+							});
+							// to fetch the child image of the config product code ends here
+							
+							
+							
+							
+							console.log(res);
+							return res;
+						}, []);
+					
+				
+					
+					
+					
+					
+					jQuery(".btn-cart").removeClass("hint--bottom");
+					jQuery(".btn-cart").removeAttr('data-hint');
+					jQuery(".btn-cart").removeAttr('disabled');
+			}  
+				//to disable add to cart button ends here
+					
+	}
+</script>
+	<script type="text/javascript">
+	// to disable add to card button
+	jQuery(document).ready(function(){
+	jQuery("div.customAttr").find("div.config_custom_div").each(function(){
+		var supeattrid=jQuery(this).closest("dd").attr("rel");
+		if(jQuery('input[name=super_attribute'+supeattrid+']:radio:checked').val()==undefined){
+			jQuery(this).closest("dd").css("border","1px solid #FF0000");
+			jQuery(".btn-cart").addClass("hint--bottom");
+			jQuery(".btn-cart").attr('data-hint', 'You need to select the given options for this Products!!');
+			jQuery(".btn-cart").attr('disabled', 'disabled');
+		}
+				
+		});
+	}); 
+	// to disable add to card btton code ends here
+		function enableDisableAttr(obj){
+			var _customAttrRel = '<?php echo json_encode($comboarr); ?>';
+				var _catImgArr = '<?php echo json_encode($catImgArr); ?>';
+			var curAttributeID = obj.val();			
+			var searchArray = new Array();
+			var searchImgArray = new Array();
+			var attArr = new Array();
+			var attrSelectProds = new Array();
+			
+			searchArray = jQuery.parseJSON(_customAttrRel);			
+			searchImgArray = jQuery.parseJSON(_catImgArr);			
+			/* console.log(searchArray);
+			console.log("=========="); 
+			console.log(searchImgArray); */
+			
+			jQuery.each(searchArray, function(key, prodIDs) {
+				if(key > 0 && prodIDs.length > 0){
+					if(key == curAttributeID){	
+						attrSelectProds = prodIDs;	
+					}				
+				}				
+			});
+			var j = 0;
+			
+			jQuery.each(searchArray, function(key, prodIDs) {
+				if(key > 0 && prodIDs.length > 0 && attrSelectProds.length > 0){
+					for(var i = 0; i < attrSelectProds.length; i++){
+					jQuery("#custom_multiselect"+key).removeClass("attrActive");
+					
+						if(jQuery.inArray( attrSelectProds[i], prodIDs ) >= 0){
+							/*  console.log(attrSelectProds[i]); */
+							/* console.log(prodIDs); 
+							console.log("=============");  */
+							attArr[j] = key;
+							j++;
+						}		
+										
+					}
+				}
+			});			
+			jQuery.unique(attArr);
+		 	/* console.log(attrSelectProds);  */
+		
+			jQuery("div.customAttr").find("div.config_custom_div").each(function(){
+				var configCustomDiv = jQuery(this);
+				jQuery(this).closest("dd").removeClass("attrActive");
+				configCustomDiv.find("input[type=radio]").each(function(){
+					if((jQuery.inArray( jQuery(this).val(), attArr ) >= 0) && curAttributeID != jQuery(this).val()){
+					jQuery(this).closest("dd").removeClass("attrActive");
+						for(var zz=0;zz< attArr.length;zz++)
+						{
+							jQuery("#custom_multiselect"+attArr[zz]).addClass("attrActive");
+							/* jQuery("#custom_multiselect"+attArr[zz]).removeClass("hoverconfig"); */
+							jQuery("#custom_hover_config"+attArr[zz]).removeClass("hoverconfig");
+							
+							
+						}
+						
+						/* console.log(jQuery(this).val());
+					console.log(attArr); */
+				/* 		jQuery(this).closest("dd").addClass("attrActive"); */
+						
+					}
+				});
+			});
+			
+		}
+		
+		
+	</script>	
+    
+    </dl>
+<?php endif;?>
+<script type="text/javascript">
+jQuery("#product-addtocart-button").click(function() {
+jQuery("div.customAttr").find("div.config_custom_div").each(function(){
+var supeattrid=jQuery(this).closest("dd").attr("rel");
+if(jQuery('input[name=super_attribute'+supeattrid+']:radio:checked').val()==undefined){
+jQuery(this).closest("dd").css("border","1px solid #FF0000");
+return false;
+}
+else
+{
+	jQuery(this).closest("dd").removeAttr("style");
+	return true;
+}
+});
+});
+</script>
+
+    <script type="text/javascript">
+        var spConfig = new Product.Config(<?php echo $this->getJsonConfig() ?>);
+		document.observe("dom:loaded", function() {
+			var customValidation = false;
+			var priceFormat = <?php echo $this->helper('tax')->getPriceFormat(); ?>;
+			$$('.validate-custom-configurable').each(function(el){
+				el.observe('click',function(event){
+					var allPrice = 0;
+					var ProductPrice = 0;
+					var totalPrice = 0;
+					enableDisableAttr(jQuery(this));
+					jQuery(".config_custom_valuee dd").removeClass("selected_config");
+					jQuery("span.conAttr").find("input[type=radio]").each(function(){
+						if(jQuery(this).is(":checked")){
+							
+							var attrPrice = jQuery(this).closest("label.label-radio-configurable").attr("id");
+							jQuery(this).closest(".config_custom_valuee dd").addClass("selected_config");
+							
+							var attID=jQuery(this).val();
+							if(jQuery("#custom_multiselect"+attID).hasClass("attrActive")==false)
+							{
+								jQuery("#custom_multiselect"+attID).removeClass("selected_config");
+							
+								jQuery("#attribute"+attID).prop('checked',false);
+							}
+							if(jQuery("#custom_multiselect"+attID).hasClass("selected_config"))
+							{
+								jQuery("#custom_multiselect"+attID).removeClass("attrActive");
+								/* jQuery("#custom_multiselect"+attID).removeClass("hoverconfig"); */
+								jQuery("#custom_hover_config"+attID).removeClass("hoverconfig");
+							}
+/* 							if(jQuery("#custom_multiselect"+attID).hasClass("attrActive")!=false)
+							{
+								jQuery("#custom_multiselect"+attID).removeClass("notinconfiguration");
+							
+							} */
+						
+							
+							if(attrPrice > 0){
+								allPrice = parseInt(allPrice) + parseInt(attrPrice);
+							}
+							
+							
+						}
+				
+							var attIDs=jQuery(this).val();
+							if(!jQuery("#custom_multiselect"+attIDs).hasClass("selected_config") && (!jQuery("#custom_multiselect"+attIDs).hasClass("attrActive")))
+							{
+								/* jQuery("#custom_multiselect"+attIDs).addClass("hoverconfig"); */
+								 jQuery("#custom_hover_config"+attIDs).addClass("hoverconfig"); 
+								 jQuery("#attribute"+attIDs).prop('checked',false);
+								 
+							}
+						
+					});
+					var ProductPrice = jQuery(this).closest("label.label-radio-configurable").attr("rel");
+					var totalPrice = parseInt(allPrice) + parseInt(ProductPrice);			
+					//console.log(el.parentNode);
+					$$('span .price').each(function(elmn){
+						//elmn.update(formatCurrency(parseFloat(el.parentNode.id), priceFormat)).innerHTML;
+						elmn.update(formatCurrency(parseFloat(totalPrice), priceFormat)).innerHTML;
+					});
+					
+					addtocartvalid();  // validation for add to cart.
+					
+					
+				});
+			});
+			Validation.addAllThese([
+				['validate-custom-configurable', 'This is a required field.', function(v) {
+					$$('.validate-custom-configurable').each(function(el){
+						if (el.checked) {
+							customValidation = true;
+						}
+					});
+					return customValidation;
+				}]
+			]);
+		});
+    </script>
